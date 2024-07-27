@@ -9,14 +9,12 @@ const jwt = require("jsonwebtoken");
 const registerUser = asyncHandler(async(req, res) => {
   const {username, email, password}  = req.body;
   if(!username || !email || !password){
-    res.status(400);
-    throw new Error("Please enter all fields");
+    return res.status(400).send({message:"Please enter all fields"});
   }
 
   const userAvailable = await User.findOne({email});
   if(userAvailable){
-    res.status(400);
-    throw new Error("User already exists");
+    return res.status(400).send({message:"User already existed"});
   }
 
   //Hash password
@@ -33,17 +31,10 @@ const registerUser = asyncHandler(async(req, res) => {
   console.log(`User created ${user}`);
 
   if (user){
-    res.status(201).json({
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-    });
+   return res.status(201).send({message:`User created successfully ,${user}`});
     } else {
-      res.status(400);
-      throw new Error("Invalid user data");
+      return res.status(400).send({message:"Invalid data"});
   }
-
-  res.json({message:"User Registered"});
 });
 
 //@desc Login a user
