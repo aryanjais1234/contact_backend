@@ -5,6 +5,12 @@ const contactRoutes = require("./routes/contactRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
 const errorHandler = require("./middleware/errorHandler.js");
 const connectDb = require("./config/dbConnection.js");
+const cors = require('cors');
+
+app.use(cors({
+  origin: '*'
+}));
+
 
 connectDb();
 
