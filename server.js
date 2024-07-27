@@ -7,14 +7,14 @@ const errorHandler = require("./middleware/errorHandler.js");
 const connectDb = require("./config/dbConnection.js");
 const cors = require('cors');
 
-app.use(cors({
-  origin: '*'
-}));
 
 
 connectDb();
 
 const app = express();
+app.use(cors({
+  origin: '*'
+}));
 
 const port = 5000;
 app.use(express.json());
